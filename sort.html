@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Algo</title>
+    <style type="text/css">
+     .wrapper {
+       margin: 0 auto;
+       width: 900px;
+     }
+     #whiteboard {
+       width: 100%;
+       margin: 10px 0;
+       background: #000;
+       padding: 2px 4px 2px 2px;
+       overflow: hidden;
+     }
+     canvas {
+       border: 1px solid black;
+       width: 900px;
+       height: 200px;
+     }
+     .terminal {
+       background: #000;
+       color: #fff;
+       font-family: monospace;
+       height: 115px;
+       width: 920px;
+       overflow: auto;
+     }
+     .terminal ul {
+       padding: 10px;
+       overflow: auto;
+     }
+     .terminal ul li {
+       list-style: none;
+     }
+    </style>
+  </head>
+  <body onload="stage = new Stage('whiteboard')">
+    <div class="wrapper">
+      <h1>Algo</h1>
+      <input type="button" value="Generate Random Values"
+             onclick="stage.populate()">
+      <input type="button" value="Insert Sort"
+             onclick="stage.insertSort()">
+      <input type="button" value="Selection Sort"
+             onclick="stage.selectionSort()">
+      <div id="whiteboard"></div>
+    </div>
+    <script src="sort.js"></script>
+  </body>
+</html>

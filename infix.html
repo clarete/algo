@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Infix, Postfix, and Prefix</title>
+    <style>
+     .result { padding-left: 20px; }
+    </style>
+  </head>
+  <body>
+    <h1>Infix, Postfix, and Prefix</h1>
+    <form>
+      <h2>Conversion from infix to postfix notation</h2>
+      <label>
+        Infix expression
+        <input type="text" name="infix" id="infix">
+      </label>
+      <input type="button" name="infix2prefix" value="Convert to Prefix"
+             onclick="$('prefix').value = $('convertOutput').innerHTML = convertInfixToPrefix($('infix').value)">
+      <input type="button" name="infix2postfix" value="Convert to Postfix"
+             onclick="$('postfix').value = $('convertOutput').innerHTML = convertInfixToPostfix($('infix').value)">
+      <span class="result" id="convertOutput"></span>
+
+      <h2>Evaluate prefix expressions</h2>
+      <label>
+        Prefix expression
+        <input type="text" name="prefix" id="prefix">
+      </label>
+      <input type="button" name="evalprefix" value="Evaluate"
+             onclick="$('evalPrefixOutput').innerHTML = evaluatePrefix($('prefix').value)">
+      <span class="result" id="evalPrefixOutput"></span>
+
+      <h2>Evaluate postfix expressions</h2>
+      <label>
+        Postfix expression
+        <input type="text" name="postfix" id="postfix">
+      </label>
+      <input type="button" name="evalpostfix" value="Evaluate"
+             onclick="$('evalOutput').innerHTML = evaluatePostfix($('postfix').value)">
+      <span class="result" id="evalOutput"></span>
+    </form>
+
+    <script src="infix.js"></script>
+  </body>
+</html>

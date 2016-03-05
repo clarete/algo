@@ -45,8 +45,21 @@ function reverse(s) {
   return o;
 }
 
+function reverseParenthesis(s) {
+  for (var i = 0, o = ''; i < s.length; i++) {
+    var c = s[i];
+    if (c == ')')
+      o += '('
+    else if (c == '(')
+      o += ')'
+    else
+      o += c;
+  }
+  return o;
+}
+
 function convertInfixToPrefix(infix) {
-  return reverse(convertInfixToPostfix(reverse(infix)))
+  return reverse(convertInfixToPostfix(reverseParenthesis(reverse(infix))));
 }
 
 function evaluatePostfix(postfix) {
@@ -60,15 +73,15 @@ function evaluatePostfix(postfix) {
       stack.push(evaluateOperator(token, operand1, operand2));
     }
   });
-  return stack.pop()
+  return stack.pop();
 }
 
 function evaluateOperator(operator, operand1, operand2) {
   switch (operator) {
-    case '*': return operand1 * operand2;;
-    case '/': return operand1 / operand2;;
-    case '+': return operand1 + operand2;;
-    case '-': return operand1 - operand2;;
+    case '*': return operand1 * operand2;
+    case '/': return operand1 / operand2;
+    case '+': return operand1 + operand2;
+    case '-': return operand1 - operand2;
   }
 }
 
@@ -83,7 +96,7 @@ function test() {
   assertEq('convertInfixToPostfix("2*3+4/5")',   convertInfixToPostfix("2*3+4/5"),   "23*45/+");
   assertEq('convertInfixToPostfix("2*(3+4)/5")', convertInfixToPostfix("2*(3+4)/5"), "234+*5/");
   assertEq('convertInfixToPrefix("2*3+4/5")',    convertInfixToPrefix("2*3+4/5"),    "+*23/45");
-  //assertEq('convertInfixToPrefix("2*(3+4)/5")',  convertInfixToPrefix("2*(3+4)/5"),  "/*2+345");
+  assertEq('convertInfixToPrefix("2*(3+4)/5")',  convertInfixToPrefix("2*(3+4)/5"),  "/*2+345");
 
   assertEq('evaluatePostfix("23*4+")',   evaluatePostfix("23*4+"),   10);
   assertEq('evaluatePostfix("94+1-2*")', evaluatePostfix("94+1-2*"), 24);

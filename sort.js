@@ -128,5 +128,62 @@ Stage.prototype = {
 
     this.terminal.push('Sorted: ' + values);
     this.queueDrawValues(values, -1, animationIndex++);
+  },
+
+  /* -- -- Merge Sort -- -- */
+
+  _merge: function (values, left, mid, right, level) {
+    var tmp = [];
+    var i, pos = 0, lpos = left, rpos = mid + 1;
+    /* var p = this._debugHeader(level);
+     * console.log('|' + p + '* conquer [' + left+ '..' + mid + '..' + right + '] = ' + values.slice(left, right+1) + '{'+ values[left] + ', ' + values[right]+'} {');*/
+    while (lpos <= mid && rpos <= right) {
+      if (values[lpos] < values[rpos]) {
+        tmp[pos++] = values[lpos++];
+      } else {
+        tmp[pos++] = values[rpos++];
+      }
+    }
+    /* console.log('|' + p + '--[V:' + values + ']');
+     * console.log('|' + p + '--[T:' + tmp + ']');*/
+    while (lpos <= mid) {
+      tmp[pos++] = values[lpos++];
+    }
+    while (rpos <= right) {
+      tmp[pos++] = values[rpos++];
+    }
+    /* console.log('|' + p + '--[V:' + values + ']');
+     * console.log('|' + p + '--[T:' + tmp + ']');*/
+    for (i = 0; i < pos; i++) {
+      /* console.log('|' + p + '-- I:' +i+ ',L:' +left+'='+(i+left) +'{'+tmp+'}');
+       * console.log('|' + p + '-- SWAP[' + values[i+left] + ', ' + tmp[i] + ']');*/
+      values[i + left] = tmp[i];
+      this.queueDrawValues(values.slice(), i+left, this.animationIndex++);
+    }
+    /* console.log('|' + p + '}');*/
+  },
+
+  _debugHeader: function (level) {
+    var p = '';
+    var l = level;
+    while (l-- > 0) p+= '-';
+    return p;
+  },
+  _mergeSort: function (values, left, right, level) {
+    /* var p = this._debugHeader(level); */
+    var mid = Math.floor((left + right) / 2);
+    if (left < right) {
+      /* console.log('|' + p + '* divide [' + left+ '..' + mid + '..' + right + '] = ' + values.slice(left, right+1) + '{'+ values[left] + ', ' + values[right]+'}');*/
+      this._mergeSort(values, left, mid, level+1);
+      this._mergeSort(values, mid+1, right, level+1);
+      this._merge(values, left, mid, right, level+1);
+    }
+  },
+
+  mergeSort: function() {
+    var values = this.values.slice();
+    this.animationIndex = 0;
+    this._mergeSort(values, 0, values.length -1 , 0);
+    this.terminal.push('Sorted: ' + values);
   }
 };

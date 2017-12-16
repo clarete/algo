@@ -44,8 +44,10 @@ function Stage(id) {
 
 Stage.prototype = {
   getDimensions: function() {
-    return {w: this.canvas.width,
-            h: this.canvas.height}
+    return {
+      w: this.canvas.width,
+      h: this.canvas.height,
+    };
   },
 
   createRandomValues: function(max) {
@@ -94,7 +96,9 @@ Stage.prototype = {
     this.drawValues(this.values);
   },
 
-  insertSort: function() {
+  /* -- Insertion Sort -- */
+
+  insertionSort: function() {
     var values = this.values.slice();
     var animationIndex = 0;
 
